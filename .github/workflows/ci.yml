@@ -9,10 +9,17 @@ jobs:
     steps:
       - name: step build
         run: echo "Hello World" > helloWorld.txt
+      - name: upload file to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: helloWorld
+          path: ./helloWorld.txt
 
   test:
     name: test
     runs-on: ubuntu-latest
     steps:
+      - name: download file from artifact
+        uses: actions/checkout@v2
       - name: step test
         run: grep "Hello World" helloWorld.txt
