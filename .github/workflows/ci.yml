@@ -14,6 +14,7 @@ jobs:
         with:
           name: helloWorld
           path: ./helloWorld.txt
+          retention-days: 5
 
   test:
     name: test
@@ -24,7 +25,9 @@ jobs:
       - name: list files before download
         run: ls -lrth --color
       - name: download file from artifact
-        uses: actions/checkout@v2
+        uses: actions/download-artifact@v2
+        with:
+          name: helloWorld
       - name: list files after download
         run: ls -lrth --color
       - name: step test
