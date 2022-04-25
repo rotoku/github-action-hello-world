@@ -44,17 +44,27 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - test
+    outputs:
+      start_step: ${{ steps.inicio.outputs.start_step }}
+      end_step: ${{ steps.fim.outputs.end_step }}
     steps:
       - name: Inicio
-        run: export START_STEP=$(date +%s%3N)
+        id: inicio
+        run: |
+          echo "::set-output name=start_step::$(date +%s%3N)"
+          
 
       - name: download file from artifact
         uses: actions/download-artifact@v2
         with:
           name: helloWorld
+
       - name: Fim
+        id: fim
         run: |
-          export END_STEP=$(date +%s%3N)
-          echo "Start Step: ${START_STEP}"
-          echo "End Step: ${END_STEP}"
-          echo "Final: ${END_STEP-START_STEP}"
+          echo "::set-output name=end_step::$(date +%s%3N)"
+          
+      - name: Consolidado
+        run: |          
+          echo "Start Step: ${{ needs.quality.outputs.start_step }}"
+          echo "End Step: ${{ needs.quality.outputs.end_step }}"
