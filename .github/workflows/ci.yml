@@ -47,6 +47,7 @@ jobs:
     steps:
       - name: Inicio
         run: export START_STEP=$(date +%s%3N)
+
       - name: download file from artifact
         uses: actions/download-artifact@v2
         with:
@@ -54,4 +55,6 @@ jobs:
       - name: Fim
         run: |
           export END_STEP=$(date +%s%3N)
-          echo $(END_STEP-START_STEP)
+          echo "Start Step: ${START_STEP}"
+          echo "End Step: ${END_STEP}"
+          echo "Final: ${END_STEP-START_STEP}"
