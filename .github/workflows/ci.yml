@@ -51,8 +51,8 @@ jobs:
       - name: Inicio
         id: inicio
         run: |
-          echo "::set-output name=start_step::$(date +%s%3N)"
-          
+          echo $(date +%s%3N)
+          echo "::set-output name=start_step::987456123"
 
       - name: download file from artifact
         uses: actions/download-artifact@v2
@@ -62,7 +62,8 @@ jobs:
       - name: Fim
         id: fim
         run: |
-          echo "::set-output name=end_step::$(date +%s%3N)"
+          echo $(date +%s%3N)
+          echo "::set-output name=end_step::987654321"
           
       - name: Consolidado
         run: |          
