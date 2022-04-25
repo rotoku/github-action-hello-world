@@ -62,3 +62,4 @@ jobs:
         run: |          
           echo "Start Step: ${{ steps.inicio.outputs.start_step }}"
           echo "End Step: ${{ steps.fim.outputs.end_step }}"
+          echo "Final: ${{ steps.fim.outputs.end_step - steps.fim.outputs.start_step }}"
